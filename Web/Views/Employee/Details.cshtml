@@ -1,0 +1,63 @@
+﻿@model Application.ViewModels.EmployeeViewModel
+@{
+    ViewBag.Title = "Details of Employee";
+}
+
+<div class="nk-block">
+    <div class="row gy-5">
+        <div class="col-12">
+            <div class="card card-bordered">
+                <ul class="data-list is-compact">
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Name of Employee</div>
+                            <div class="data-value fw-bold">@Model.FullName</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Phone Number</div>
+                            <div class="data-value">@Model.PhoneNumber</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">State</div>
+                            <div class="data-value">@Model.localGovnment.state.Name</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Gender</div>
+                            <div class="data-value">@Model.Gender</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Username</div>
+                            <div class="data-value">@Model.UserName</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Email</div>
+                            <div class="data-value">@Model.Email</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Role</div>
+                            <div class="data-value">@Model.Role</div>
+                        </div>
+                    </li>
+                    <li class="data-item">
+                        <div class="data-col">
+                            <div class="data-label">Employee type</div>
+                            <div class="data-value">@Model.EmployeeType</div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- .card -->
+        </div><!-- .col -->
+    </div><!-- .row -->
+</div><!-- .nk-block -->

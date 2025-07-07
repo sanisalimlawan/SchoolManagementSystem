@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="The Light college of health" />
+    <title>@ViewData["Title"] - Dayyib Academy</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="~/assets/css/dashlite.css">
+    <link id="skin-default" rel="stylesheet" href="~/assets/css/theme.css">
+</head>
+<body class="nk-body bg-lighter npc-general has-sidebar">
+    <div class="nk-app-root">
+        @* main *@
+        <div class="nk-main">
+            <partial name="_sidebar" />
+            <div class="nk-wrap">
+                <partial name="_topbar" />
+                <div class="nk-content ">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                @await Html.PartialAsync("_page_title.cshtml")
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer -->
+                <div class="nk-footer" style="">
+                    <div class="container-fluid">
+                        <div class="nk-footer-wrap">
+                            <div class="nk-footer-copyright justify-center">
+                                &copy; @DateTime.Now.Year Dayyib.</a>
+                            </div>
+                            <div class="nk-footer-links">
+                                <ul class="nav nav-sm">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer-->
+            </div>
+        </div>
+
+    </div>
+    <!-- JavaScript -->
+    <script src="~/assets/js/bundle.js"></script>
+    <script src="~/assets/js/scripts.js"></script>
+    <script src="~/assets/js/charts/chart-hotel.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
