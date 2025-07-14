@@ -10,7 +10,9 @@ namespace Infrastructure.Services.Interface
     public interface ILocationsSevices
     {
         public Task<IEnumerable<SessionViewModel>> GetAllSessions();
+        public Task<IEnumerable<ClassViewModel>> GetAllClassesAsync();
         public Task<IEnumerable<RoleViewModel>> GetAllRoles();
+        public Task<IEnumerable<EmployeeViewModel>> GetAllTeachersAsync();
         public Task<IEnumerable<EmployeeViewModel>> GetAllFormMastersAsync();
         public Task<IEnumerable<SectionViewModel>> GetAllSectionAsync();
         public Task<IEnumerable<ProgramViewModel>> GetAllProgramAsync();

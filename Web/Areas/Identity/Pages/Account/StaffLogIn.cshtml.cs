@@ -19,13 +19,13 @@ using Application.Constant;
 
 namespace Web.Areas.Identity.Pages.Account
 {
-    public class StudentLogInModel : PageModel
+    public class StaffLogInModel : PageModel
     {
         private readonly SignInManager<Persona> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly ILogger<StaffLogInModel> _logger;
         private readonly UserManager<Persona> _userManager;
 
-        public StudentLogInModel(SignInManager<Persona> signInManager, ILogger<LoginModel> logger, UserManager<Persona> userManager)
+        public StaffLogInModel(SignInManager<Persona> signInManager, ILogger<StaffLogInModel> logger, UserManager<Persona> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -122,10 +122,16 @@ namespace Web.Areas.Identity.Pages.Account
                     TempData["error"] = "Credential do Macth Any in Our Server";
                     return Page();
                 }
-                var checkRole = await _userManager.IsInRoleAsync(user, RoleConstant.SuperAdmin);
-                if (!checkRole)
+                var checkRole = await _userManager.IsInRoleAsync(user, RoleConstant.Student);
+                if (checkRole)
                 {
-                    TempData["error"] = "Only SuperAdmin are Allowed To LogIn Here!";
+                    TempData["error"] = "Only Staff are Allowed To LogIn Here!";
+                    return Page();
+                }
+                var checkRoleforadmin = await _userManager.IsInRoleAsync(user, RoleConstant.SuperAdmin);
+                if (checkRoleforadmin)
+                {
+                    TempData["error"] = "Only Staff are Allowed To LogIn Here!";
                     return Page();
                 }
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
@@ -133,7 +139,11 @@ namespace Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     TempData["success"] = "You Successfully LogIn!";
-                    return LocalRedirect(returnUrl);
+                    if(returnUrl != null)
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    return RedirectToAction("Profile", "Employee");
                 }
                 if (result.RequiresTwoFactor)
                 {

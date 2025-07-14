@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using Application.Constant
 <!-- main header  -->
 <div class="nk-header nk-header-fixed is-light">
     <div class="container-fluid">
@@ -20,21 +21,46 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    @* @{
+                                    @{
                                         string roleName;
-                                        if(User.IsInRole(RoleConstant.SuperAdmin))
+                                        if (User.IsInRole(RoleConstant.SuperAdmin))
                                         {
                                             roleName = "SuperAdmin";
-                                        }else if(User.IsInRole(RoleConstant.CoordinatorEML))
-                                        {
-                                            roleName = "CoordinatorEML";
-                                        }else{
-                                            roleName = "Visitors";
                                         }
-                                    } *@
-                                    <div class="user-status user-status-active">roleName</div>
+                                        else if (User.IsInRole(RoleConstant.Principal))
+                                        {
+                                            roleName = "Principal";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.Accountant))
+                                        {
+                                            roleName = "Accountant";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.Teacher))
+                                        {
+                                            roleName = "Teacher";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.FormMaster))
+                                        {
+                                            roleName = "FormMaster";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.Parent))
+                                        {
+                                            roleName = "Parent";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.Student))
+                                        {
+                                            roleName = "Student";
+                                        }
+                                        else if (User.IsInRole(RoleConstant.ExamOfficer))
+                                        {
+                                            roleName = "ExamOfficer";
+                                        }
+                                        else
+                                            roleName = "Visitors";
+                                    }
+                                    <div class="user-status user-status-active">@roleName.ToString()</div>
                                     <div class="user-name dropdown-indicator">
-                                        @* @User.Claims.First(x => x.Type == ClaimTypes.Surname).Value; *@
+                                        @User.Claims.First(x => x.Type == ClaimTypes.Name).Value
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +79,7 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="/"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    <li><a asp-controller="Admin" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
                                     <li>
                                         <a href="/"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
                                     </li>
@@ -66,7 +92,7 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <form asp-controller="Account" asp-action="SignOut">
+                                        <form asp-area="Identity" asp-page="/Account/Logout">
                                             <button type="submit" class=" btn btn-link link-danger px-0 fw-bold"><em class="icon ni ni-signout "></em><span>Sign out</span></button>
                                         </form>
                                     </li>

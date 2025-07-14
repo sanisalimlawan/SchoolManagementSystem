@@ -165,9 +165,9 @@
                         <div class="nk-tb-item nk-tb-head">
                             <div class="nk-tb-col">#</div>
                             <div class="nk-tb-col"><span class="sub-text">Name</span></div>
-                            <div class="nk-tb-col "><span class="sub-text">Section</span></div>
-                            <div class="nk-tb-col "><span class="sub-text">School Fees</span></div>
-                            <div class="nk-tb-col "><span class="sub-text">Total Student</span></div>
+                            <div class="nk-tb-col tb-col-mb"><span class="sub-text">Section</span></div>
+                            <div class="nk-tb-col tb-col-mb"><span class="sub-text">School Fees</span></div>
+                            <div class="nk-tb-col "><span class="sub-text">Form Master</span></div>
                             <div class="nk-tb-col "><span class="sub-text">Total Subject</span></div>
 
                             <div class="nk-tb-col nk-tb-col-tools text-end">
@@ -194,17 +194,17 @@
                                 <div class="nk-tb-col ">
                                     <span id="tes">@Section.Name</span>
                                 </div>
-                                <div class="nk-tb-col ">
+                                <div class="nk-tb-col tb-col-mb">
                                     <span id="tes">@Section.section.Name</span>
                                 </div>
-                                    <div class="nk-tb-col ">
+                                <div class="nk-tb-col tb-col-mb">
                                         <span id="tes">@Section.section.Fees</span>
                                     </div>
                                     <div class="nk-tb-col ">
-                                        <span id="tes">@Section.TotalStudent</span>
+                                        <span id="tes">@Section.Teacher.FullName</span>
                                     </div>
                                     <div class="nk-tb-col ">
-                                        <span id="tes">@Section.Teacher.FullName</span>
+                                    <span id="tes">@Section.TotalSubject</span>
                                     </div>
                                 <div class="nk-tb-col">
                                     <ul class="nk-tb-actions gx-1">

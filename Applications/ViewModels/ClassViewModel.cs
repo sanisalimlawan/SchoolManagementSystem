@@ -15,7 +15,8 @@ namespace Application.ViewModels
         public Guid TeacherId { get; set; }
         public EmployeeViewModel Teacher { get; set; }
         public SectionViewModel section { get; set; }
-        public int TotalStudent { get; set; }
+        public int TotalSubject { get; set; }
+        public ICollection<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
         //public List<StudentViewModel> student = new List<StudentViewModel>();
     }
 }

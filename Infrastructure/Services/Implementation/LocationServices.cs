@@ -127,5 +127,41 @@ namespace Infrastructure.Services.Implementation
             return result;
         }
 
+        public async Task<IEnumerable<ClassViewModel>> GetAllClassesAsync()
+        {
+            var classes = await _db.classes.Select(x => new ClassViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).OrderBy(x => x.Name).ToListAsync();
+            return classes;
+        }
+
+        public async Task<IEnumerable<EmployeeViewModel>> GetAllTeachersAsync()
+        {
+            //  Get all Teaching employees
+            var teachingEmployees = await _db.employees
+                .Where(e => e.EmployeeType == Application.Enum.EmployeeType.Teaching)
+                .Select(e => new EmployeeViewModel
+                {
+                    Id = e.Id,
+                    UserId = e.UserId
+                }).ToListAsync();
+
+            //var result = new List<EmployeeViewModel>();
+
+            // Step 2: Enrich with Identity info and filter only FormMasters
+            foreach (var emp in teachingEmployees)
+            {
+                var user = await _userManager.FindByIdAsync(emp.UserId.ToString());
+                if (user != null)
+                {
+                        emp.FirstName = user.FirstName;
+                        emp.LastName = user.LastName;
+                }
+            }
+
+            return teachingEmployees;
+        }
     }
 }

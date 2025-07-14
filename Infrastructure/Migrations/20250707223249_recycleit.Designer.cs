@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250707223249_recycleit")]
+    partial class recycleit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -463,36 +466,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("students");
                 });
 
-            modelBuilder.Entity("Domain.Entities.StudentProgram", b =>
-                {
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProgramId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModefiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("StudentId", "ProgramId");
-
-                    b.HasIndex("ProgramId");
-
-                    b.ToTable("StudentPrograms");
-                });
-
             modelBuilder.Entity("Domain.Entities.Subject", b =>
                 {
                     b.Property<Guid>("Id")
@@ -748,25 +721,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("LocalGovnment");
                 });
 
-            modelBuilder.Entity("Domain.Entities.StudentProgram", b =>
-                {
-                    b.HasOne("Domain.Entities.Program", "Program")
-                        .WithMany("StudentPrograms")
-                        .HasForeignKey("ProgramId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Student", "Student")
-                        .WithMany("StudentPrograms")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Program");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Domain.Entities.Subject", b =>
                 {
                     b.HasOne("Domain.Entities.Class", "Class")
@@ -853,16 +807,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Subjects");
 
                     b.Navigation("students");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Program", b =>
-                {
-                    b.Navigation("StudentPrograms");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Student", b =>
-                {
-                    b.Navigation("StudentPrograms");
                 });
 #pragma warning restore 612, 618
         }

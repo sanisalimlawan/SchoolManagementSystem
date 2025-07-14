@@ -133,7 +133,11 @@ namespace Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     TempData["success"] = "You Successfully LogIn!";
-                    return RedirectToAction(nameof(Index), "Employee");
+                    if(returnUrl != null)
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    return RedirectToAction("DashBoard", "Admin");
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -1,4 +1,5 @@
 ﻿@using Application.Constant
+@using System.Security.Claims
 <!-- sidebar s -->
 <div class="nk-sidebar nk-sidebar-fixed is-dark " data-content="sidebarMenu">
     <div class="nk-sidebar-element nk-sidebar-head">
@@ -12,112 +13,181 @@
         <div class="nk-sidebar-content">
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
-                    <li class="nk-menu-item">
-                        <a asp-controller="Admin" asp-action="DashBoard" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-dashboard-fill"></em></span>
-                            <span class="nk-menu-text">Dashboard</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-book-fill"></em></span>
-                            <span class="nk-menu-text">Academic Settings</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a asp-controller="Program" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Programs</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a asp-controller="Session" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Sessions</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a asp-controller="Term" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Terms</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a asp-controller="Section" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">School section</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
-                            <span class="nk-menu-text">Employees</span>
-                        </a>
+                    @* @if (User.Claims.First(x => x.Type == ClaimTypes.Name).Value == RoleConstant.Teacher)
+                    {
+                        <li class="nk-menu-item">
+                            <a asp-controller="Admin" asp-action="DashBoard" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-dashboard-fill"></em></span>
+                                <span class="nk-menu-text">Dashboard for claims</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        
+                    } *@
+                    @if (User.IsInRole(RoleConstant.SuperAdmin))
+                    {
+                        <li class="nk-menu-item">
+                            <a asp-controller="Admin" asp-action="DashBoard" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-dashboard-fill"></em></span>
+                                <span class="nk-menu-text">Dashboard</span>
+                            </a>
+                        </li>
+                    
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-book-fill"></em></span>
+                                <span class="nk-menu-text">Academic Settings</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Program" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Programs</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Session" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Sessions</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Term" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Terms</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Section" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">School section</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
+                                <span class="nk-menu-text">Employees</span>
+                            </a>
                             <ul class="nk-menu-sub">
                                 <li class="nk-menu-item">
                                     <a asp-controller="Employee" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Employee</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                <a asp-controller="Employee" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                    <a asp-controller="Employee" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                <a asp-controller="Employee" asp-action="Teachers" class="nk-menu-link"><span class="nk-menu-text">Teaching Staff</span></a>
+                                    <a asp-controller="Employee" asp-action="Teachers" class="nk-menu-link"><span class="nk-menu-text">Teaching Staff</span></a>
                                 </li>
                                 <li class="nk-menu-item">
                                     <a href="html/lms/enroll-student.html" class="nk-menu-link"><span class="nk-menu-text">Staff ID Card</span></a>
                                 </li>
                             </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a asp-controller="Class" asp-action="Index" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-book"></em></span>
-                            <span class="nk-menu-text">Classes</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a asp-controller="Subject" asp-action="Index" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-book-read"></em></span>
-                            <span class="nk-menu-text">Subject</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item ">
-                        <a href="#" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
-                            <span class="nk-menu-text"> Student</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-property-add"></em></span>
-                            <span class="nk-menu-text"> Lecturer & Staff Management</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/lms/enroll-history.html" class="nk-menu-link"><span class="nk-menu-text">Staffs</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/lms/enroll-student.html" class="nk-menu-link"><span class="nk-menu-text">Attendance & Leave</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-file-docs"></em></span>
-                            <span class="nk-menu-text">Reports & Analytics</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/lms/student-invoice-list.html" class="nk-menu-link"><span class="nk-menu-text">Student Progress Report</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/lms/student-invoice-details.html" class="nk-menu-link"><span class="nk-menu-text">Finance Summary</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-sign-kobo-alt"></em></span>
-                            <span class="nk-menu-text">Finance & Fees</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/lms/student-invoice-list.html" class="nk-menu-link"><span class="nk-menu-text">Student Progress Report</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/lms/student-invoice-details.html" class="nk-menu-link"><span class="nk-menu-text">Finance Summary</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-book"></em></span>
+                                <span class="nk-menu-text">Classes</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Class" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Classes</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Class" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-book-read"></em></span>
+                                <span class="nk-menu-text">Subjects</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Subject with Classes</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
+                                <span class="nk-menu-text">Student</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Student</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Promotion</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-calendar-check-fill"></em></span>
+                                <span class="nk-menu-text"> Attendance & Leave</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/enroll-history.html" class="nk-menu-link"><span class="nk-menu-text">Student Attendace</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/enroll-student.html" class="nk-menu-link"><span class="nk-menu-text">Staff Attendance & Leave</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-docs"></em></span>
+                                <span class="nk-menu-text">Reports & Analytics</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/student-invoice-list.html" class="nk-menu-link"><span class="nk-menu-text">Student Progress Report</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/student-invoice-details.html" class="nk-menu-link"><span class="nk-menu-text">Finance Summary</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-sign-kobo-alt"></em></span>
+                                <span class="nk-menu-text">Finance & Fees</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/student-invoice-list.html" class="nk-menu-link"><span class="nk-menu-text">Student Progress Report</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="html/lms/student-invoice-details.html" class="nk-menu-link"><span class="nk-menu-text">Finance Summary</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a asp-controller="Admin" asp-action="Setting" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-setting-alt-fill"></em></span>
+                                <span class="nk-menu-text">Settings</span>
+                            </a>
+                        </li>
+
+                        <!-- .nk-menu-item -->
+                    }
                     @if (User.IsInRole(RoleConstant.Teacher))
                     {
                         <li class="nk-menu-item">

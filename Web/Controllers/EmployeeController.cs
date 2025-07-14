@@ -114,6 +114,11 @@ namespace Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Profile()
+        {
+            return View();
+        }
+
         #region endpoints
 
         [HttpGet]

@@ -10,8 +10,13 @@ namespace Domain.Entities
     public class Subject : Base
     {
         public string Name { get; set; }
+        public int TotalCAMark { get; set; }
+        public int TotalExamMark { get; set; }
         public Guid ClassId { get; set; }
         [ForeignKey(nameof(ClassId))]
-        public Class Classes { get; set; }
+        public Class Class { get; set; }
+        public Guid SubjectTeacherId { get; set; }
+        [ForeignKey(nameof(SubjectTeacherId))]
+        public Employee SubjectTeacher { get; set; }
     }
 }

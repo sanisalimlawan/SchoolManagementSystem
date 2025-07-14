@@ -50,6 +50,7 @@ builder.Services.AddTransient<IEmployeeRepo, EmployeeRepo>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ISectionRepo, SectionRepo>();
 builder.Services.AddScoped<IClassRepo, ClassRepo>();
+builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();
 builder.Services.AddHostedService<DbSeed>();
 var app = builder.Build();
 

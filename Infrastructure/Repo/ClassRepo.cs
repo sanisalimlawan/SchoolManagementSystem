@@ -22,6 +22,11 @@ namespace Infrastructure.Repo
         }
         public async Task<BaseResponse> CreateAsync(ClassViewModel item, string createdBy)
         {
+            var validate = await _db.classes.SingleOrDefaultAsync(x => x.Name == item.Name);
+            if(validate != null)
+            {
+                return new BaseResponse() { Status = false, Message = "Class with same Exist" };
+            }
             var classes = new Class
             {
                 Id = Guid.NewGuid(),
@@ -78,7 +83,7 @@ namespace Infrastructure.Repo
                         Description = x.section.Program.Description
                     }
                 },
-                TotalStudent = x.students.Count,
+                    TotalSubject = x.Subjects.Count,
                 TeacherId = x.TecherId,
                 Teacher =  new EmployeeViewModel
                 {
@@ -94,7 +99,7 @@ namespace Infrastructure.Repo
                     classvm.Teacher.FirstName = user.FirstName;
                     classvm.Teacher.LastName = user.LastName;
                     classvm.Teacher.OthersName = user.OthersName;
-                    classvm.Teacher.Email = user?.Email;
+                    classvm.Teacher.Email = user.Email;
                     classvm.Teacher.PhoneNumber = user?.PhoneNumber;
                     classvm.Teacher.UserName = user.UserName;
                 }
@@ -123,7 +128,8 @@ namespace Infrastructure.Repo
                         Description = x.section.Program.Description
                     }
                 },
-                TeacherId = x.TecherId
+                TeacherId = x.TecherId,
+                TotalSubject = x.Subjects.Count
             });
             var count = await data.CountAsync();
             var items = await data.Skip((filter.PageIndex - 1) * filter.PageSize).

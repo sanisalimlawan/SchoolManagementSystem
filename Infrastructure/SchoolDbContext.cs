@@ -22,6 +22,7 @@ namespace Infrastructure
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Student> students { get; set; }
+        public DbSet<StudentProgram> StudentPrograms { get; set; }
         public DbSet<Employee> employees { get; set; }
         public DbSet<State> states { get; set; }
         public DbSet<LocalGovnment> localGovnments { get; set; }
@@ -30,6 +31,37 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Subject>()
+            .HasOne(s => s.SubjectTeacher)
+            .WithMany()
+            .HasForeignKey(s => s.SubjectTeacherId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Subject>()
+           .HasOne(s => s.Class).WithMany(c=> c.Subjects). HasForeignKey(x=>x.ClassId)
+           .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Class>()
+                .HasMany(x => x.students).WithOne(x => x.Class).HasForeignKey(x => x.ClassId);
+            modelBuilder.Entity<Student>()
+              .HasOne(x => x.LocalGovnment).WithMany().HasForeignKey(x => x.LocalGovnmentId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Student>()
+                .HasOne(x => x.Class).WithMany(x => x.students).HasForeignKey(x => x.ClassId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<StudentProgram>()
+        .HasKey(sp => new { sp.StudentId, sp.ProgramId });
+
+            modelBuilder.Entity<StudentProgram>()
+                .HasOne(sp => sp.Student)
+                .WithMany(s => s.StudentPrograms)
+                .HasForeignKey(sp => sp.StudentId)
+    .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StudentProgram>()
+                .HasOne(sp => sp.Program)
+                .WithMany(p => p.StudentPrograms)
+                .HasForeignKey(sp => sp.ProgramId)
+    .OnDelete(DeleteBehavior.Restrict);
+
             // Additional model configurations can be added here
         }
 
