@@ -20,6 +20,7 @@ namespace Infrastructure.Repo
         private readonly SchoolDbContext _db;
         private readonly UserManager<Persona> _userManager;
         private readonly RoleManager<Role> _roleManager;
+        //private readonly Flutterwave _flutterwaveSettings;
         public EmployeeRepo(IWebHostEnvironment web,SchoolDbContext db, UserManager<Persona> userManager,RoleManager<Role> roleManager)
         {
             _web=web;
@@ -47,7 +48,6 @@ namespace Infrastructure.Repo
             };
             user.UserName = model.PhoneNumber;
             var imageurl = file != null && file.Length > 0 ? await SaveImageAsync(file) : null ;
-
             var employee = new Employee
             {
                 Id = Guid.NewGuid(),
@@ -133,7 +133,7 @@ namespace Infrastructure.Repo
                     }
 
 
-                    // ✅ Delete image from wwwroot
+                    // Delete image from wwwroot
                     if (!string.IsNullOrWhiteSpace(Employee.ProfilePic))
                     {
                         string relativePath = Employee.ProfilePic.TrimStart('/', '\\').Replace("/", Path.DirectorySeparatorChar.ToString());
@@ -145,7 +145,7 @@ namespace Infrastructure.Repo
                         }
                         else
                         {
-                            Console.WriteLine("❌ File not found at: " + imagePath);
+                            Console.WriteLine(" File not found at: " + imagePath);
                         }
                     }
 
@@ -307,7 +307,7 @@ namespace Infrastructure.Repo
                 Religion = EmployeeIndb.Religion,
                 Salary = EmployeeIndb.Salary,
                 EmployeeType = EmployeeIndb.EmployeeType,
-                Role = roleIndb.ToString(),
+                Role = string.Join(',',roleIndb),
                 localGovnment = new LocalGovernmentViewModel
                 {
                     Id = EmployeeIndb.localGovnment.Id,

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Infrastructure.Services.Implementation
 {
@@ -162,6 +163,26 @@ namespace Infrastructure.Services.Implementation
             }
 
             return teachingEmployees;
+        }
+
+        public async Task<IEnumerable<SectionViewModel>> GetSectionByProgramIdAsync(Guid programId)
+        {
+            var sections = await _db.Sections.Include(x => x.Program).Where(x => x.ProgramId == programId).Select(x => new SectionViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).OrderBy(x => x.Name).ToListAsync();
+            return sections;
+        }
+
+        public async Task<IEnumerable<ClassViewModel>> GetClassesBysectionIdAsync(Guid sectionId)
+        {
+            var classes = await _db.classes.Include(x => x.section).Where(x => x.sectionId == sectionId).Select(x => new ClassViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).OrderBy(x => x.Name).ToListAsync();
+            return classes;
         }
     }
 }

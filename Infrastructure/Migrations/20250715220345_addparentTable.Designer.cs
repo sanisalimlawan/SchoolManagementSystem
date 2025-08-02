@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250715220345_addparentTable")]
+    partial class addparentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,18 +160,8 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateOnly>("DOB")
-                        .HasColumnType("date");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -176,26 +169,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("LastModefiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Occupation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RelationShip")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Religion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -302,9 +277,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("ApplicationFee")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -471,11 +443,8 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Allergies")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BloodGroup")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -484,12 +453,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("date");
 
                     b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Genotype")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Height")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -501,17 +464,10 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("LocalGovnmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MedicalConditions")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Religion")
@@ -524,10 +480,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("Weight")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
 
                     b.HasIndex("LocalGovnmentId");
 
@@ -542,12 +497,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProgramId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClassId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ClassId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -565,11 +514,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("StudentId", "ProgramId", "ClassId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("ClassId1");
+                    b.HasKey("StudentId", "ProgramId");
 
                     b.HasIndex("ProgramId");
 
@@ -814,6 +759,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Student", b =>
                 {
+                    b.HasOne("Domain.Entities.Class", "Class")
+                        .WithMany("students")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.LocalGovnment", "LocalGovnment")
                         .WithMany()
                         .HasForeignKey("LocalGovnmentId")
@@ -826,6 +777,8 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Class");
+
                     b.Navigation("LocalGovnment");
 
                     b.Navigation("Parent");
@@ -833,16 +786,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.StudentProgram", b =>
                 {
-                    b.HasOne("Domain.Entities.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Class", null)
-                        .WithMany("studentprograms")
-                        .HasForeignKey("ClassId1");
-
                     b.HasOne("Domain.Entities.Program", "Program")
                         .WithMany("StudentPrograms")
                         .HasForeignKey("ProgramId")
@@ -854,8 +797,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Class");
 
                     b.Navigation("Program");
 
@@ -947,7 +888,7 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("Subjects");
 
-                    b.Navigation("studentprograms");
+                    b.Navigation("students");
                 });
 
             modelBuilder.Entity("Domain.Entities.Parent", b =>

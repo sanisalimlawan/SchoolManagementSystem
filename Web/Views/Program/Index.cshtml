@@ -168,6 +168,7 @@
                                 <div class="nk-tb-col">#</div>
                                 <div class="nk-tb-col"><span class="sub-text">Name</span></div>
                                 <div class="nk-tb-col tb-col-md"><span class="sub-text">Descriptions</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Application Fee</span></div>
 
                                 <div class="nk-tb-col ">
                                     <span class="sub-text"></span>
@@ -191,6 +192,9 @@
                                     <div class="nk-tb-col tb-col-md">
                                             <span class="">@program.Description</span>
                                     </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                            <span class="">@program.Fee</span>
+                                    </div>
                                     <div class="nk-tb-col ">
                                         <ul class="nk-tb-actions gx-1">
                                             <li>
@@ -205,6 +209,7 @@
                                                                    data-id="@program.Id"
                                                                    data-name="@program.Name"
                                                                    data-description="@program.Description"
+                                                                   data-fee="@program.Fee"
                                                                    data-bs-toggle="modal"
                                                                 data-bs-target="#Edit">
                                                                     <em class="icon ni ni-edit"></em><span>Edit</span>
@@ -282,6 +287,15 @@
                                                                 <label class="form-label">Description</label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" id="edit-description" class="form-control " required name="description" placeholder="description" />
+                                                                    @* <div class="form-note">Date format <code>mm/dd/yyyy</code></div> *@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Appliction Fee</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="number" id="edit-fee" class="form-control " required name="fee" placeholder="Application Fee" />
                                                                     @* <div class="form-note">Date format <code>mm/dd/yyyy</code></div> *@
                                                                 </div>
                                                             </div>
@@ -391,6 +405,15 @@ else
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Application Fee</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control" required name="fee" placeholder="Application Fee" />
+                                    @* <div class="form-note">Date format <code>mm/dd/yyyy</code></div> *@
+                                </div>
+                            </div>
+                        </div>
                        
                         <div class="col-sm-12 col-xxl-3">
                             <div class="form-group">
@@ -418,6 +441,7 @@ else
                     document.getElementById("edit-name").value = this.dataset.name;
                     document.getElementById("edit-code").value = this.dataset.start;
                     document.getElementById("edit-description").value = this.dataset.description;
+                    document.getElementById("edit-fee").value = this.dataset.Fee;
                 });
             });
         });

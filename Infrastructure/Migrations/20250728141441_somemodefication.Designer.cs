@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250728141441_somemodefication")]
+    partial class somemodefication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,10 +186,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RelationShip")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Religion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -302,9 +301,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("ApplicationFee")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -547,9 +543,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClassId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -568,8 +561,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("StudentId", "ProgramId", "ClassId");
 
                     b.HasIndex("ClassId");
-
-                    b.HasIndex("ClassId1");
 
                     b.HasIndex("ProgramId");
 
@@ -834,14 +825,10 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.StudentProgram", b =>
                 {
                     b.HasOne("Domain.Entities.Class", "Class")
-                        .WithMany()
+                        .WithMany("studentprograms")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Domain.Entities.Class", null)
-                        .WithMany("studentprograms")
-                        .HasForeignKey("ClassId1");
 
                     b.HasOne("Domain.Entities.Program", "Program")
                         .WithMany("StudentPrograms")

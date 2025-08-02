@@ -10,6 +10,7 @@ namespace Web.Controllers
         }
         public IActionResult Setting()
         {
+            //Flutterwave
             return View();
         }
         public IActionResult Profile()

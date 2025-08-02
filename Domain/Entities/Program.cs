@@ -10,6 +10,7 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public decimal ApplicationFee { get; set; }
         public ICollection<StudentProgram> StudentPrograms { get; set; } = new List<StudentProgram>();
 
     }

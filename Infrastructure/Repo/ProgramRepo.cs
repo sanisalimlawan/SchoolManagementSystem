@@ -21,7 +21,7 @@ namespace Data.Repo
         {
             _context = context;
         } 
-        public async Task<BaseResponse> CreateAsync(string name,  string description)
+        public async Task<BaseResponse> CreateAsync(string name,  string description, decimal fee)
         {
             var program = new Program
             {
@@ -29,6 +29,7 @@ namespace Data.Repo
                 CreatedAt = DateTime.UtcNow,
                 IsDeleted = false,
                 Name = name,
+                ApplicationFee = fee,
                 Description = description,
             };
 
@@ -73,6 +74,7 @@ namespace Data.Repo
                 Id = check.Id,
                 Name = check.Name,
                 Description = check.Description,
+                Fee = check.ApplicationFee
             };
             return program;
         }
@@ -83,7 +85,8 @@ namespace Data.Repo
             {
                 Id = x.Id,
                 Name = x.Name,
-                Description = x.Description
+                Description = x.Description,
+                Fee = x.ApplicationFee
             });
 
             var count = await programIndb.CountAsync();
@@ -92,7 +95,7 @@ namespace Data.Repo
             return PaginatedList<ProgramViewModel>.Create(items, count, filter);
         }
 
-        public async Task<BaseResponse> UpdateAsync(Guid id, string name,  string description)
+        public async Task<BaseResponse> UpdateAsync(Guid id, string name,  string description, decimal fee)
         {
             var programIndb = await _context.Programs.FindAsync(id);
             if (programIndb == null)
@@ -100,6 +103,7 @@ namespace Data.Repo
             programIndb.Id = id;
             programIndb.Name = name;
             programIndb.Description = description;
+            programIndb.ApplicationFee = fee;
             _context.Programs.Update(programIndb);
             var result = await _context.TrySaveChangesAsync();
             if (result)

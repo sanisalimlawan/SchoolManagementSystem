@@ -75,7 +75,7 @@
     </div><!-- .row -->
     <!-- Charts & Reports -->
     <div class="row mt-4">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header bg-light">
                     <h6 class="card-title">Student Distribution by Class</h6>
@@ -85,13 +85,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-header bg-light">
-                    <h6 class="card-title">Fees Collection Status</h6>
+                    <h6 class="card-title">Estimated Fees This Month</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="feesChart"></canvas>
+                    @* <canvas id="feesChart"></canvas> *@
+                    <div class="nk-ck-sm">
+                        <canvas class="doughnut-chart" id="doughnutChartData"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -247,10 +250,10 @@
         new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ['JSS1', 'JSS2', 'SS1', 'SS2'],
+                labels: ['JSS1', 'JSS2', 'SS1', 'SS2', 'SS2', 'SS2','SS2'],
                 datasets: [{
                     label: '# of Students',
-                    data: [150, 180, 130, 110],
+                    data: [150, 180, 130, 110, 110, 110, 210],
                     backgroundColor: 'rgba(54, 162, 235, 0.6)'
                 }]
             }

@@ -10,7 +10,7 @@ namespace Application.IRepo
 {
     public interface IProgramRepo : IBaseRepo<ProgramViewModel>
     {
-        public Task<BaseResponse> CreateAsync(string name,  string description);
-        public Task<BaseResponse> UpdateAsync(Guid id, string name,  string description);
+        public Task<BaseResponse> CreateAsync(string name,  string description, decimal fee);
+        public Task<BaseResponse> UpdateAsync(Guid id, string name,  string description,decimal fee);
     }
 }

@@ -17,6 +17,6 @@ namespace Domain.Entities
         [ForeignKey(nameof(TecherId))]
         public Employee employee { get; set; }
         public ICollection<Subject> Subjects { get; set; } = new List<Subject>();
-        public ICollection<Student> students { get; set; } = new List<Student>();
+        public ICollection<StudentProgram> studentprograms { get; set; } = new List<StudentProgram>();
     }
 }

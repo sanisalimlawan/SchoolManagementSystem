@@ -5,6 +5,7 @@ using Infrastructure.Services.Implementation;
 using Infrastructure.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Web.Controllers
@@ -114,9 +115,12 @@ namespace Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            return View();
+            var UserId = Guid.Parse(User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value);
+            var data = await _emprepo.GetByUserId(UserId);
+            return View(data);
         }
 
         #region endpoints
@@ -139,6 +143,7 @@ namespace Web.Controllers
             {
                 message = "Local Governments not found"
             });
+             
         }
 
         #endregion

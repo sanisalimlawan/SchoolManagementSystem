@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.ViewModels
 {
-    public class Parent : Base
+    public class ParentViewModel
     {
         public Guid UserId { get; set; }
         public Gender Gender { get; set; }  
@@ -16,7 +16,6 @@ namespace Domain.Entities
         public string Religion { get; set; }
         public string Address { get; set; }
         public string Occupation { get; set; }
-        public string RelationShip { get; set; }
-        public ICollection<Student> students { get; set; } = new List<Student>();
+        public ICollection<StudentViewModel> students { get; set; } = new List<StudentViewModel>();
     }
 }

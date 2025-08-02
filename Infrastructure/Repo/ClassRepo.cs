@@ -1,6 +1,7 @@
 ﻿using Application.IRepo;
 using Application.ViewModels;
 using Domain.Entities;
+using Flutterwave.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace Infrastructure.Repo
         {
             _db = db;
             _userManager = userManager;
+            //FlutterwaveApi
         }
         public async Task<BaseResponse> CreateAsync(ClassViewModel item, string createdBy)
         {
@@ -64,7 +66,7 @@ namespace Infrastructure.Repo
 
         public async Task<ClassViewModel?> GetByIdAsync(Guid id)
         {
-            var classvm = await _db.classes.Include(s =>s.students).Include(x=>x.section).
+            var classvm = await _db.classes.Include(s =>s.studentprograms).Include(x=>x.section).
                 ThenInclude(p =>p.Program).Include(x => x.employee).ThenInclude(x=>x.UserId).Select(x => new ClassViewModel
             {
                 Id = x.Id,

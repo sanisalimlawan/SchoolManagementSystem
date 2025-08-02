@@ -22,10 +22,14 @@ namespace Infrastructure
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Student> students { get; set; }
+        public DbSet<Parent> parents { get; set; }
         public DbSet<StudentProgram> StudentPrograms { get; set; }
         public DbSet<Employee> employees { get; set; }
         public DbSet<State> states { get; set; }
         public DbSet<LocalGovnment> localGovnments { get; set; }
+        public DbSet<Income> incomes { get; set; }
+        public DbSet<Expensive> expensives { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,13 +46,16 @@ namespace Infrastructure
            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Class>()
-                .HasMany(x => x.students).WithOne(x => x.Class).HasForeignKey(x => x.ClassId);
+                .HasMany(x => x.studentprograms).WithOne(x => x.Class).HasForeignKey(x => x.ClassId)
+    .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Student>()
               .HasOne(x => x.LocalGovnment).WithMany().HasForeignKey(x => x.LocalGovnmentId).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Student>()
-                .HasOne(x => x.Class).WithMany(x => x.students).HasForeignKey(x => x.ClassId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Student>().HasMany(x => x.StudentPrograms).WithOne(x => x.Student).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Student>().HasMany(x => x.StudentPrograms).WithOne(x=>x.Class)
+            
+            modelBuilder.Entity<Student>().HasOne(x => x.Parent).WithMany(x => x.students).HasForeignKey(x => x.ParentId);
             modelBuilder.Entity<StudentProgram>()
-        .HasKey(sp => new { sp.StudentId, sp.ProgramId });
+        .HasKey(sp => new { sp.StudentId, sp.ProgramId, sp.ClassId });
 
             modelBuilder.Entity<StudentProgram>()
                 .HasOne(sp => sp.Student)
@@ -61,7 +68,15 @@ namespace Infrastructure
                 .WithMany(p => p.StudentPrograms)
                 .HasForeignKey(sp => sp.ProgramId)
     .OnDelete(DeleteBehavior.Restrict);
-
+            modelBuilder.Entity<StudentProgram>()
+    .HasOne(sp => sp.Class)
+    .WithMany()
+    .HasForeignKey(sp => sp.ClassId);
+            modelBuilder.Entity<Program>()
+    .HasMany(p => p.StudentPrograms)
+    .WithOne(sp => sp.Program)
+    .HasForeignKey(sp => sp.ProgramId)
+    .OnDelete(DeleteBehavior.Restrict);
             // Additional model configurations can be added here
         }
 

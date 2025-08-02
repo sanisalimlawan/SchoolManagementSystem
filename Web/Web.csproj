@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+
+	  <PackageReference Include="ChatGPT.Net" Version="2.0.0" />
+	  <PackageReference Include="Flutterwave.Net" Version="2.0.0" />
+	  <PackageReference Include="itext7" Version="8.0.4" />
+	  <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
@@ -27,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\NewFolder\" />
+    <Folder Include="Views\Finance\" />
   </ItemGroup>
 
 </Project>

@@ -68,7 +68,7 @@
                                     <a asp-controller="Employee" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Employee</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Employee" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                    <a asp-controller="Employee" asp-action="Create" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                 </li>
                                 <li class="nk-menu-item">
                                     <a asp-controller="Employee" asp-action="Teachers" class="nk-menu-link"><span class="nk-menu-text">Teaching Staff</span></a>
@@ -90,7 +90,7 @@
                                     <a asp-controller="Class" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Classes</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Class" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                    <a asp-controller="Class" asp-action="Create" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                 </li>
                             </ul><!-- .nk-menu-sub -->
                         </li>
@@ -106,7 +106,7 @@
                                     <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">Subject with Classes</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                    <a asp-controller="Subject" asp-action="Create" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                 </li>
                             </ul><!-- .nk-menu-sub -->
                         </li>
@@ -119,13 +119,13 @@
                             </a>
                             <ul class="nk-menu-sub">
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Student</span></a>
+                                    <a asp-controller="Student" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">All Student</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                    <a asp-controller="Student" asp-action="Create" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                 </li>
                                 <li class="nk-menu-item">
-                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Promotion</span></a>
+                                    <a asp-controller="Student" asp-action="Promotion" class="nk-menu-link"><span class="nk-menu-text">Promotion</span></a>
                                 </li>
                             </ul><!-- .nk-menu-sub -->
                         </li>
@@ -145,7 +145,23 @@
                                 </li>
                             </ul><!-- .nk-menu-sub -->
                         </li>
-
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
+                                <span class="nk-menu-text">Exams/Test</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Indexm" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New Exam</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Mark Exam</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
                         <!-- .nk-menu-item -->
                         <li class="nk-menu-item has-sub">
                             <a href="#" class="nk-menu-link nk-menu-toggle">
@@ -170,7 +186,16 @@
                             </a>
                             <ul class="nk-menu-sub">
                                 <li class="nk-menu-item">
-                                    <a href="html/lms/student-invoice-list.html" class="nk-menu-link"><span class="nk-menu-text">Student Progress Report</span></a>
+                                    <a asp-controller="Finance" asp-action="DashBoard" class="nk-menu-link"><span class="nk-menu-text">Income</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Finance" asp-action="DashBoard" class="nk-menu-link"><span class="nk-menu-text">Expensive</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Finance" asp-action="DashBoard" class="nk-menu-link"><span class="nk-menu-text">Invoive List</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Finance" asp-action="DashBoard" class="nk-menu-link"><span class="nk-menu-text">Payment / Tranctions</span></a>
                                 </li>
                                 <li class="nk-menu-item">
                                     <a href="html/lms/student-invoice-details.html" class="nk-menu-link"><span class="nk-menu-text">Finance Summary</span></a>
@@ -202,6 +227,23 @@
                                 <span class="nk-menu-text">My Subjects</span>
                             </a>
                         </li>
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
+                                <span class="nk-menu-text">Exams/Test</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New Exam</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Mark Exam</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li>
                     }
 
                     @* FORM MASTER MENU *@
@@ -218,6 +260,35 @@
                                 <span class="nk-menu-icon"><em class="icon ni ni-file-docs"></em></span>
                                 <span class="nk-menu-text">Student Reports</span>
                             </a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a asp-controller="Teacher" asp-action="MyClasses" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-book"></em></span>
+                                <span class="nk-menu-text">My Classes</span>
+                            </a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a asp-controller="Teacher" asp-action="Subjects" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-book-read"></em></span>
+                                <span class="nk-menu-text">My Subjects</span>
+                            </a>
+                        </li>
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-user-fill"></em></span>
+                                <span class="nk-menu-text">Exams/Test</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Index" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Add New Exam</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a asp-controller="Subject" asp-action="Creates" class="nk-menu-link"><span class="nk-menu-text">Mark Exam</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
                         </li>
                     }
                     @* <li class="nk-menu-item has-sub">

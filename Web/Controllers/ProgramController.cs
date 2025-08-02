@@ -19,12 +19,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name, string description)
+        public async Task<IActionResult> Create(string name, string description,string fee)
         {
             if (ModelState.IsValid)
             {
+                var dfee = decimal.Parse(fee);
                  //TimeStructure timeStructureEnum = (TimeStructure)Enum.Parse(typeof(TimeStructure), timeStructure, true);
-                var response = await _repo.CreateAsync(name,description);
+                var response = await _repo.CreateAsync(name,description,dfee);
                 if (response.Status)
                 {
                     TempData["success"] = response.Message;
@@ -38,12 +39,12 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, string name, string description)
+        public async Task<IActionResult> Edit(Guid id, string name, string description,decimal fee)
         {
             if (ModelState.IsValid)
             {
                 //TimeStructure timeStructureEnum = (TimeStructure)Enum.Parse(typeof(TimeStructure), timeStructure, true);
-                var response = await _repo.UpdateAsync(id, name, description);
+                var response = await _repo.UpdateAsync(id, name, description,fee);
                 if (response.Status)
                 {
                     TempData["success"] = response.Message;

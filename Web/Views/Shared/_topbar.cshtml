@@ -72,14 +72,29 @@
                                         <span>AB</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">Abu Bin Ishtiyak</span>
-                                        <span class="sub-text">info@softnio.com</span>
+                                        <span class="lead-text">@User.Claims.First(x =>x.Type == ClaimTypes.Name).Value</span>
+                                        <span class="sub-text">@User.Claims.First(x => x.Type == ClaimTypes.Email).Value</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a asp-controller="Admin" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    @if (User.IsInRole(RoleConstant.SuperAdmin))
+                                    {
+                                        <li><a asp-controller="Admin" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    }
+                                    @if (User.IsInRole(RoleConstant.Parent))
+                                    {
+                                        <li><a asp-controller="Parent" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    }
+                                    @if (User.IsInRole(RoleConstant.Student))
+                                    {
+                                        <li><a asp-controller="Student" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    }
+                                    @if (User.Claims.First(x => x.Type == ClaimTypes.Role) != null)
+                                    {
+                                        <li><a asp-controller="Employee" asp-action="Profile"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    }
                                     <li>
                                         <a href="/"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
                                     </li>
