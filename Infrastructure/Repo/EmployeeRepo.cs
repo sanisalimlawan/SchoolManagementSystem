@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 namespace Infrastructure.Repo
@@ -71,9 +72,12 @@ namespace Infrastructure.Repo
             if(!string.IsNullOrWhiteSpace(user.Email))
                 await _userManager.SetEmailAsync(user, user.Email);
             var result = await _userManager.CreateAsync(user, user.Password);
+            string emptype = model.EmployeeType == EmployeeType.Teaching ? "TeachingStaff" : "NonTeachingStaff";
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
+                var staffclaim = new Claim("EmployeeType", emptype);
+                await _userManager.AddClaimAsync(user, staffclaim);
             }
             else
             {

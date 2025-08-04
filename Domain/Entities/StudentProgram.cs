@@ -15,7 +15,6 @@ namespace Domain.Entities
         public Guid ProgramId { get; set; }
         public Program Program { get; set; }
         public Guid ClassId { get; set; }
-        [ForeignKey(nameof(ClassId))]
         public Class Class { get; set; }
     }
 }

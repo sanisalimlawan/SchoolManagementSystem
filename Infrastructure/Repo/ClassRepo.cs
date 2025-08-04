@@ -21,6 +21,7 @@ namespace Infrastructure.Repo
             _db = db;
             _userManager = userManager;
             //FlutterwaveApi
+            var random = new Random();
         }
         public async Task<BaseResponse> CreateAsync(ClassViewModel item, string createdBy)
         {

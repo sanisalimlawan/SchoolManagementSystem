@@ -13,7 +13,7 @@
         <div class="nk-sidebar-content">
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
-                    @* @if (User.Claims.First(x => x.Type == ClaimTypes.Name).Value == RoleConstant.Teacher)
+                    @if (User.HasClaim("EMP_TYPE", "Teaching"))
                     {
                         <li class="nk-menu-item">
                             <a asp-controller="Admin" asp-action="DashBoard" class="nk-menu-link">
@@ -25,7 +25,7 @@
                     else
                     {
                         
-                    } *@
+                    }
                     @if (User.IsInRole(RoleConstant.SuperAdmin))
                     {
                         <li class="nk-menu-item">

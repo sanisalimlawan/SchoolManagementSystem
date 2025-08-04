@@ -77,6 +77,18 @@ namespace Infrastructure
     .WithOne(sp => sp.Program)
     .HasForeignKey(sp => sp.ProgramId)
     .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Income>()
+    .Property(i => i.Amount)
+    .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Expensive>() // or Expense if typo
+                .Property(e => e.Amount)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Program>()
+                .Property(p => p.ApplicationFee)
+                .HasColumnType("decimal(18,2)");
+
             // Additional model configurations can be added here
         }
 

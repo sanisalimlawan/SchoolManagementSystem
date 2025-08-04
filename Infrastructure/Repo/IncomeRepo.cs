@@ -32,14 +32,19 @@ namespace Infrastructure.Repo
                 Id = Guid.NewGuid(),
                 description = item.Description,
                 Amount = item.Amount,
-                Date = item.Date,
+                DateRecieve = item.DateRecieve,
+                Source = item.Source,
+                Category = item.Category,
+                PaymentMethod = item.PaymentMethod,
+                ReferenceNumber = item.ReferenceNumber,
+                ReceivedByUserId = item.ReceivedByUserId,
                 IsDeleted = false,
                 CreatedAt = DateTime.UtcNow
             };
             _db.incomes.Add(incomes);
             var result = await _db.TrySaveChangesAsync();
             if (result)
-                return new BaseResponse() { Status = true, Message = "Income created successfuly" };
+                return new BaseResponse() { Status = true, Message = "Income Added successfuly" };
             return new BaseResponse() { Status = false, Message = "sorry we had a server error!" };
 
         }
@@ -69,7 +74,12 @@ namespace Infrastructure.Repo
                 Id = x.Id,
                 Description = x.description,
                 Amount = x.Amount,
-                Date = x.Date,
+                DateRecieve = x.DateRecieve,
+                Category = x.Category,
+                Source = x.Source,
+                PaymentMethod = x.PaymentMethod,
+                ReceivedByUserId = x.ReceivedByUserId,
+                ReferenceNumber = x.ReferenceNumber,
             }).SingleOrDefaultAsync(x => x.Id == id);
 
             return incomevm;
@@ -80,7 +90,14 @@ namespace Infrastructure.Repo
             var data = _db.incomes.Select(x => new IncomeViewModel
             {
                 Id = x.Id,
-
+                Description = x.description,
+                Amount = x.Amount,
+                DateRecieve = x.DateRecieve,
+                Category = x.Category,
+                Source = x.Source,
+                PaymentMethod = x.PaymentMethod,
+                ReceivedByUserId = x.ReceivedByUserId,
+                ReferenceNumber = x.ReferenceNumber,
             });
             var count = await data.CountAsync();
             var items = await data.Skip((filter.PageIndex - 1) * filter.PageSize).
@@ -96,7 +113,12 @@ namespace Infrastructure.Repo
             if (clIndb == null)
                 return new BaseResponse() { Status = false, Message = "Income not Found" };
             clIndb.description = item.Description;
-            clIndb.Date = item.Date;
+            clIndb.DateRecieve = item.DateRecieve;
+            clIndb.ReferenceNumber = item.ReferenceNumber;
+            clIndb.ReceivedByUserId = item.ReceivedByUserId;
+            clIndb.PaymentMethod = item.PaymentMethod;
+            clIndb.Category = item.Category;
+            clIndb.Source = item.Source;
             clIndb.Amount = item.Amount;
             clIndb.UpdatedAt = DateTime.UtcNow;
             _db.incomes.Update(clIndb);
