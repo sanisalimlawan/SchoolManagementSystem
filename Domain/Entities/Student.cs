@@ -23,6 +23,7 @@ namespace Domain.Entities
         public string? Genotype { get; set; }
         public int? Height { get; set; } // in cm
         public int? Weight { get; set; } // in kg
+        public string Nationality {get; set; }
         public Guid LocalGovnmentId { get; set; }
         [ForeignKey(nameof(LocalGovnmentId))]
         public LocalGovnment LocalGovnment { get; set; }

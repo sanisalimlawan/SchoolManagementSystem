@@ -77,7 +77,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">First Name</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" id="cp1-project-name" name="cp1-project-name" required>
+                                                        <input asp-for="FirstName" type="text" class="form-control" id="cp1-project-name" name="cp1-project-name" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +85,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">Last Name</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" id="cp1-project-name" name="cp1-project-name" required>
+                                                        <input type="text" asp-for="LastName" class="form-control" id="cp1-project-name" name="cp1-project-name" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">OthersName</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" id="cp1-project-name" name="cp1-project-name">
+                                                        <input type="text" asp-for="OthersName" class="form-control" id="" name="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,7 +101,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-lead">Gender</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select js-select2" asp-items="Html.GetEnumSelectList<Gender>()" id="cp1-project-lead" name="cp1-project-lead" data-placeholder="Select Lead" required>
+                                                        <select asp-for="Gender" class="form-select js-select2" asp-items="Html.GetEnumSelectList<Gender>()" id="cp1-project-lead" name="cp1-project-lead" data-placeholder="Select Lead" required>
                                                             <option selected disabled>-- Select Gender --</option>
                                                         </select>
                                                     </div>
@@ -111,7 +111,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-deadline">DOB</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control date-picker" id="cp1-project-deadline" name="cp1-project-deadline" placeholder="mm/dd/yyyy" required>
+                                                        <input type="text" asp-for="DOB" class="form-control date-picker" id="cp1-project-deadline" name="cp1-project-deadline" placeholder="mm/dd/yyyy" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,7 +136,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">Religion</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" placeholder="Religion" id="cp1-project-name" name="cp1-project-name" required>
+                                                        <input type="text" asp-for="Religion" class="form-control" placeholder="Religion" id="cp1-project-name" name="cp1-project-name" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,7 +149,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">Nationality</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" placeholder="Nationality" id="cp1-project-name" name="cp1-project-name" required>
+                                                        <input type="text"  class="form-control" placeholder="Nationality" id="cp1-project-name" name="cp1-project-name" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,7 +157,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-name">Residential Address</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control" placeholder="Residential Address" id="cp1-project-name" name="cp1-project-name" required>
+                                                        <input type="text" asp-for="Address" class="form-control" placeholder="Residential Address" id="cp1-project-name" name="cp1-project-name" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,7 +165,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-lead">State</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " asp-items="ViewBag.states" id="stateId" onchange="Fecthlga(this, 'LGAId')"  required>
+                                                        <select class="form-select "  asp-items="ViewBag.states" id="stateId" onchange="Fecthlga(this, 'LGAId')"  required>
                                                             <option selected disabled>-- Select State --</option>
                                                         </select>
                                                     </div>
@@ -175,7 +175,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="cp1-project-lead">LGA</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " id="LGAId" name="cp1-project-lead" required>
+                                                        <select class="form-select " asp-for="LocalGovnmentId" id="LGAId" name="cp1-project-lead" required>
                                                             <option selected disabled>-- Select LGA --</option>
                                                         </select>
                                                     </div>
@@ -191,7 +191,7 @@
                                                 <div class="form-group">
                                                 <label class="form-label" for="medicalConditions">Medical Conditions</label>
                                                 <div class="form-control-wrap">
-                                                        <select class="form-select js-select2" id="medicalConditions" name="MedicalConditions" multiple>
+                                                        <select asp-for="MedicalConditions" class="form-select js-select2" id="medicalConditions" name="MedicalConditions" multiple>
                                                     <option value="" disabled >-- Select Condition --</option>
                                                     <option value="None">None</option>
                                                     <option value="Asthma">Asthma</option>
@@ -213,7 +213,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="allergies">Allergies (if any)</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select js-select2" id="allergies" name="Allergies" multiple>
+                                                        <select asp-for="Allergies" class="form-select js-select2" id="allergies" name="Allergies" multiple>
                                                             <option value="" disabled>-- Select Allergy --</option>
                                                             <option value="None">None</option>
                                                             <option value="Peanuts">Peanuts</option>
@@ -235,7 +235,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="blood-group">Blood Group</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " id="blood-group" name="BloodGroup" required>
+                                                        <select asp-for="BloodGroup" class="form-select " id="blood-group" name="BloodGroup" required>
                                                             <option value="" disabled selected>-- Select Blood Group --</option>
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A−</option>
@@ -255,7 +255,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="genotype">Genotype</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " id="genotype" name="Genotype">
+                                                        <select asp-for="Genotype" class="form-select " id="genotype" name="Genotype">
                                                             <option value="">-- Select Genotype --</option>
                                                             <option value="AA">AA</option>
                                                             <option value="AS">AS</option>
@@ -273,7 +273,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="height">Height (cm)</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " id="height" name="Height" required></select>
+                                                        <select asp-for="Height" class="form-select " id="height" name="Height" required></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,7 +283,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="weight">Weight (kg)</label>
                                                     <div class="form-control-wrap">
-                                                        <select class="form-select " id="weight" name="Weight" required></select>
+                                                        <select asp-for="Weight" class="form-select " id="weight" name="Weight" required></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,7 +315,7 @@
                                                             <div class="col-sm-4">
                                                                 <div class="form-group">
                                                                     <label class="form-label">Select Class</label>
-                                                                    <select class="form-select" asp-for="ClassId" id="Class_@i" required>
+                                                                    <select class="form-select" asp-for="StudentPrograms[@i].ClassId" id="Class_@i" required>
                                                                         <option disabled selected>Select Class</option>
                                                                     </select>
                                                                 </div>
@@ -327,31 +327,52 @@
 
                                         <button type="button" class="btn btn-sm btn-primary" onclick="addProgramClass()">Add Another Program</button>
                                         <div class="form-group">
-                                            <label>Is the student on a scholarship?</label><br />
-                                            <div>
+                                            <label class="form-label">Is the student on a scholarship?</label><br />
+                                            <div class="form-control-wrap">
                                                 <input type="radio" name="HasScholarship" value="yes" onclick="toggleScholarshipForm(true)" /> Yes
                                                 <input type="radio" name="HasScholarship" value="no" onclick="toggleScholarshipForm(false)" checked /> No
                                             </div>
                                         </div>
 
-                                        <div id="scholarshipFields" style="display: none;">
-                                            <div class="form-group">
-                                                <label for="ScholarshipType">Scholarship Type</label>
-                                                <select name="Scholarship.Type" class="form-control" onchange="toggleScholarshipInput(this)">
-                                                    <option value="">-- Select Type --</option>
-                                                    <option value="Amount">Amount</option>
-                                                    <option value="Percentage">Percentage</option>
-                                                </select>
-                                            </div>
+                                        <div class="row g-3" id="scholarshipFields" style="display: none;">
+                                            @* <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="ScholarshipType">Scholarship Type</label>
+                                                    <select  class="form-control" onchange="toggleScholarshipInput(this)">
+                                                        <option selected disabled>-- Select Type --</option>
+                                                        <option value="Amount">Amount</option>
+                                                        <option value="Percentage">Percentage</option>
+                                                    </select>
+                                                </div>
+                                            </div> *@
 
-                                            <div class="form-group" id="scholarshipAmountField" style="display: none;">
-                                                <label>Scholarship Amount</label>
-                                                <input name="Scholarship.Amount" class="form-control" />
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="ScholarshipType">Scholarship Type</label>
+                                                    <select asp-for="Scholarship.Type" asp-items="Html.GetEnumSelectList<ScholarshipType>()" class="form-control" onchange="toggleScholarshipInput(this)">
+                                                        <option selected disabled>-- Select Type --</option>
+                                                    </select>
+                                                </div>
                                             </div>
+                                            
 
-                                            <div class="form-group" id="scholarshipPercentageField" style="display: none;">
-                                                <label>Scholarship Percentage (%)</label>
-                                                <input name="Scholarship.Percentage" class="form-control" />
+                                            <div class="col-md-6" id="scholarshipAmountField" style="display: none;">
+                                                <div class="form-group" >
+                                                     <label class="form-label">Scholarship Amount</label>
+                                                    <input asp-for="Scholarship.Amount" name="Scholarship.Amount" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="scholarshipPercentageField" style="display: none;">
+                                                <div class="form-group">
+                                                    <label class="form-label">Scholarship Percentage (%)</label>
+                                                    <input asp-for="Scholarship.Percentage" name="Scholarship.Percentage" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                  <div class="form-group" >
+                                                      <label class="form-label">Description</label>
+                                                     <input asp-for="Scholarship.Description" name="Scholarship.Percentage" class="form-control" />
+                                                    </div>
                                             </div>
                                         </div>
 
@@ -371,40 +392,40 @@
                                         <div class="row g-3" style="display:none;" id="newGuardianSection">
                                             <div class="col-md-6">
                                                 <label class="form-label" for="FirstName">First Name</label>
-                                                <input   class="form-control" required />
+                                                <input type="text" asp-for="Parent.FirstName" class="form-control" required />
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="LastName">Last Name</label>
-                                                <input  class="form-control" required />
+                                                <input type="text" asp-for="Parent.LastName"  class="form-control" required />
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="OtherNames">Other Names</label>
-                                                <input class="form-control" />
+                                                <input type="text" asp-for="Parent.OthersName" class="form-control" />
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="Gender">Gender</label>
-                                                <select  asp-items="Html.GetEnumSelectList<Gender>()" class="form-select js-select2" required>
+                                                <select asp-for="Parent.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-select js-select2" required>
                                                     <option disabled selected>-- Select Gender --</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="DOB">Date of Birth</label>
-                                                <input  class="form-control date-picker" placeholder="mm/dd/yyyy" required />
+                                                <input asp-for="Parent.DOB"  class="form-control date-picker" placeholder="mm/dd/yyyy" required />
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="ProfilePicture">Profile Picture</label>
-                                                <input  type="file" class="form-control" />
+                                                <input  type="file" class="form-control" name="Pfile" />
                                                 <a href="https://www.photoresizer.com" target="_blank">Resize/Convert your photo here</a>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="form-label" for="Religion">Religion</label>
-                                                <input asp-for="Religion" class="form-control" required />
+                                                <input asp-for="Parent.Religion" class="form-control" required />
                                             </div>
                                         </div>
 
@@ -412,7 +433,7 @@
                                         <div class="row g-3" style="display:none;" id="existingGuardianSection">
                                             <div class="col-md-6">
                                                 <label class="form-label" for="ExistingGuardianId">Select Guardian</label>
-                                                <select  class="form-select js-select2" required>
+                                                <select asp-for="ParentId"   class="form-select " required>
                                                     <option disabled selected>-- Select Existing Guardian/Parent --</option>
                                                 </select>
                                             </div>
@@ -1400,13 +1421,13 @@
         programIndex++;
     }
     function toggleScholarshipForm(show) {
-        document.getElementById("scholarshipFields").style.display = show ? "block" : "none";
+        document.getElementById("scholarshipFields").style.display = show ? "flex" : "none";
     }
 
     function toggleScholarshipInput(select) {
-        const type = select.value;
-        document.getElementById("scholarshipAmountField").style.display = type === "Amount" ? "block" : "none";
-        document.getElementById("scholarshipPercentageField").style.display = type === "Percentage" ? "block" : "none";
+        const type = parseInt(select.value;)
+        document.getElementById("scholarshipAmountField").style.display = type === 0 ? "block" : "none";
+        document.getElementById("scholarshipPercentageField").style.display = type === 1 ? "block" : "none";
     }
 
         function ConfirmSubmit(form, event) {

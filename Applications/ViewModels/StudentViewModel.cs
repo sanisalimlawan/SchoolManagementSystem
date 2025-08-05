@@ -44,16 +44,15 @@ namespace Application.ViewModels
         public Guid LocalGovnmentId { get; set; }
         public LocalGovernmentViewModel LocalGovnment { get; set; }
 
-        public Guid ClassId { get; set; }
-        public ClassViewModel Class { get; set; }
+        public string Nationality { get; set; }
 
         // Many-to-Many with Program
         public List<StudentProgramViewModel> StudentPrograms { get; set; } = new List<StudentProgramViewModel> ();
-        public Guid ParentId { get; set; }
-        [ForeignKey(nameof(ParentId))]
-        public ParentViewModel Parent
+        public Guid? ParentId { get; set; }
+        public ParentViewModel? Parent
         {
             get; set;
         }
+        public ScholarshipViewModel? Scholarship { get; set; }
     }
 }

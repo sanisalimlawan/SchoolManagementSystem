@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.ViewModels
 {
-    public class Scholarship : Base
+    public class ScholarshipViewModel
     {
+        public Guid Id { get; set; }
         public Guid StudentId { get; set; }
         public Student Student { get; set; }
 
@@ -20,6 +21,6 @@ namespace Domain.Entities
         public string? Description { get; set; }   // Optional notes (e.g. scholarship name)
 
         public DateTime StartDate { get; set; } = DateTime.UtcNow;  // Date the student Start Scholarship
-        public DateTime? EndDate { get; set; }  // Date the student End Scholarship
+        public DateTime? EndDate { get; set; }  // Date the student Start Scholarship
     }
 }

@@ -29,6 +29,7 @@ namespace Infrastructure
         public DbSet<LocalGovnment> localGovnments { get; set; }
         public DbSet<Income> incomes { get; set; }
         public DbSet<Expensive> expensives { get; set; }
+        public DbSet<Scholarship> Scholarships { get; set; }
 
 
 
@@ -55,7 +56,7 @@ namespace Infrastructure
             
             modelBuilder.Entity<Student>().HasOne(x => x.Parent).WithMany(x => x.students).HasForeignKey(x => x.ParentId);
             modelBuilder.Entity<StudentProgram>()
-        .HasKey(sp => new { sp.StudentId, sp.ProgramId, sp.ClassId });
+        .HasKey(sp =>  sp.Id);
 
             modelBuilder.Entity<StudentProgram>()
                 .HasOne(sp => sp.Student)
@@ -71,7 +72,7 @@ namespace Infrastructure
             modelBuilder.Entity<StudentProgram>()
     .HasOne(sp => sp.Class)
     .WithMany()
-    .HasForeignKey(sp => sp.ClassId);
+    .HasForeignKey(sp => sp.ClassId).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Program>()
     .HasMany(p => p.StudentPrograms)
     .WithOne(sp => sp.Program)
@@ -88,6 +89,9 @@ namespace Infrastructure
             modelBuilder.Entity<Program>()
                 .Property(p => p.ApplicationFee)
                 .HasColumnType("decimal(18,2)");
+            modelBuilder.Entity<Scholarship>().HasOne(s => s.Student)
+    .WithOne(st => st.Scholarship)
+    .HasForeignKey<Scholarship>(s => s.StudentId);
 
             // Additional model configurations can be added here
         }

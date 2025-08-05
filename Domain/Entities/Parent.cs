@@ -17,6 +17,8 @@ namespace Domain.Entities
         public string Address { get; set; }
         public string Occupation { get; set; }
         public string RelationShip { get; set; }
+        public string Nationality { get; set; }
+        public string NIN { get; set; }
         public ICollection<Student> students { get; set; } = new List<Student>();
     }
 }

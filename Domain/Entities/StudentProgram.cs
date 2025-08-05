@@ -16,5 +16,8 @@ namespace Domain.Entities
         public Program Program { get; set; }
         public Guid ClassId { get; set; }
         public Class Class { get; set; }
+        public bool IsActive { get; set; } = true; // to track active enrollment
+
+        public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;
     }
 }
