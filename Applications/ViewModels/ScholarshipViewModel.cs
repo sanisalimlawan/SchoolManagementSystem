@@ -11,12 +11,12 @@ namespace Application.ViewModels
     {
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public StudentViewModel Student { get; set; }
 
         public ScholarshipType Type { get; set; } // Enum: Amount or Percentage
 
         public decimal? Amount { get; set; }       // Only if Type == Amount
-        public float? Percentage { get; set; }     // Only if Type == Percentage
+        public decimal? Percentage { get; set; }     // Only if Type == Percentage
 
         public string? Description { get; set; }   // Optional notes (e.g. scholarship name)
 

@@ -17,8 +17,8 @@ namespace Domain.Entities
         public string? ProfilePicture { get; set; }
         public string Religion { get; set; }
         public string Address { get; set; }
-        public List<string>? MedicalConditions { get; set; }  // Multiple select
-        public List<string>? Allergies { get; set; }
+        public string? MedicalConditions { get; set; }  // Multiple select
+        public string? Allergies { get; set; }
         public string? BloodGroup { get; set; }
         public string? Genotype { get; set; }
         public int? Height { get; set; } // in cm
@@ -28,6 +28,7 @@ namespace Domain.Entities
         [ForeignKey(nameof(LocalGovnmentId))]
         public LocalGovnment LocalGovnment { get; set; }
 
+        public Scholarship? Scholarship { get; set; }
         // Many-to-Many with Program
         public ICollection<StudentProgram> StudentPrograms { get; set; } = new List<StudentProgram>();
         public Guid ParentId { get; set; }

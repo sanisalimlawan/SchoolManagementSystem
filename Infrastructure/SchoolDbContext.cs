@@ -92,7 +92,13 @@ namespace Infrastructure
             modelBuilder.Entity<Scholarship>().HasOne(s => s.Student)
     .WithOne(st => st.Scholarship)
     .HasForeignKey<Scholarship>(s => s.StudentId);
+            modelBuilder.Entity<Scholarship>()
+    .Property(s => s.Amount)
+    .HasPrecision(18, 2); // Or use HasColumnType("decimal(18,2)");
 
+            modelBuilder.Entity<Scholarship>()
+                .Property(s => s.Percentage)
+                .HasPrecision(5, 2);
             // Additional model configurations can be added here
         }
 

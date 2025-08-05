@@ -35,8 +35,8 @@ namespace Application.ViewModels
         public string? ProfilePicture { get; set; }
         public string Religion { get; set; }
         public string Address { get; set; }
-        public List<string>? MedicalConditions { get; set; }  // Multiple select
-        public List<string>? Allergies { get; set; }
+        public List<string>? MedicalConditions { get; set; } = new();  // Multiple select
+        public List<string>? Allergies { get; set; } = new();
         public string? BloodGroup { get; set; }
         public string? Genotype { get; set; }
         public int? Height { get; set; } // in cm
